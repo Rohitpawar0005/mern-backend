@@ -5,8 +5,6 @@ const authenticate = (req, res, next) => {
   try {
     let token = req.headers.authorization;
     token = token.split(" ")[1];
-    if (!token) return res.status(401).json({ message: "No token provided" });
-
     const user = jwt.verify(token, SECRET);
     req.role = user.role;
     next();
